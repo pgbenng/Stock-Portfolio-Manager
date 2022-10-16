@@ -7,8 +7,6 @@ created to enter information such as the stock name, stock price during buying a
 selling, and number of shares bought or sold for each
 stock into their stock portfolio.
 
-<br> </br>
-
 **Possible features include:**
 - Displaying the total value of each stock holding.
 - Calculating the value of each profile's stock portfolio based on each stock holding and transaction.
@@ -27,7 +25,9 @@ where all the information regarding their portfolio is easily accessible.
  
 ## User Stories
 
-- As a user, I want to be able to add any amount of stocks that I've bought to my stock portfolio.
-- As a user, I want to see how much total gain/loss I have gotten on my investments.
-- As a user, I want to add any amount of stocks to my watchlist.
-- As a user, I want to see every transaction that I have made since creating my portfolio.
+- As a user, I want to be able to add any number of stocks that I've bought to my investing account 
+(all users will only have one account for now).
+- As a user, I want to see the total amount of money I have deposited into my account.
+- As a user, I want to see the list of stocks I bought in my investing account, including each stock's value in the 
+portfolio and number of shares purchased.
+- As a user, I want to add any amount of stocks into my stock watchlist.
