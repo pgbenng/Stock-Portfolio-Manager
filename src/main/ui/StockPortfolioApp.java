@@ -142,7 +142,7 @@ public class StockPortfolioApp {
 
     // EFFECTS: displays the user's stock watchlist
     private void processDisplayStockWatchlist() {
-        System.out.println("You currently have " + this.investingAccount.getStocksPurchased().size()
+        System.out.println("You currently have " + this.watchlist.getWatchlist().size()
                 + " different stocks in your watchlist!");
         for (int i = 0; i < watchlist.getWatchlist().size(); i++) {
             System.out.println(i + ": " + watchlist.getWatchlist().get(i).getTicker());
