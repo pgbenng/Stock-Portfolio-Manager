@@ -34,11 +34,22 @@ public class StockWatchlistTest {
     }
 
     @Test
-    public void testAddStockToWatchlistWithOneStockButTwice() {
+    public void testAddStockToWatchlistWithOneStockButTwiceWithSamePrices() {
         this.testWatchlist.addStockToWatchlist(apple);
         this.testWatchlist.addStockToWatchlist(apple);
         this.accurateList.add(apple);
         assertEquals(this.accurateList.get(0), this.testWatchlist.getWatchlist().get(0));
+        assertEquals(1, this.testWatchlist.getWatchlist().size());
+    }
+
+    @Test
+    public void testAddStockToWatchlistWithOneStockButTwiceWithDifferentPrices() {
+        this.testWatchlist.addStockToWatchlist(apple);
+        this.accurateList.add(apple);
+        apple.setPrice(130);
+        this.testWatchlist.addStockToWatchlist(apple);
+        this.accurateList.add(apple);
+        assertEquals(this.accurateList.get(1), this.testWatchlist.getWatchlist().get(0));
         assertEquals(1, this.testWatchlist.getWatchlist().size());
     }
 

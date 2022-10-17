@@ -12,9 +12,17 @@ public class StockWatchlist {
     }
 
     // MODIFIES: this
-    // EFFECTS: adds inputted stock into watchlist if not in watchlist
+    // EFFECTS: adds inputted stock into watchlist if not in watchlist, or updates existing stock prices if is in
+    // watchlist
     public void addStockToWatchlist(Stock s) {
-        if (!watchlist.contains(s)) {
+        boolean stockInWatchlist = false;
+        for (Stock stock : this.watchlist) {
+            if (stock.getTicker() == s.getTicker()) {
+                stockInWatchlist = true;
+                stock.setPrice(s.getPrice());
+            }
+        }
+        if (!stockInWatchlist) {
             this.watchlist.add(s);
         }
     }

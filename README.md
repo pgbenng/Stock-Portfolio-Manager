@@ -10,7 +10,6 @@ stock into their stock portfolio.
 **Possible features include:**
 - Displaying the total value of each stock holding.
 - Calculating the value of each profile's stock portfolio based on each stock holding and transaction.
-- Displaying the amount of gain/loss of the portfolio after each stock sale.
 - A stock watchlist.
 - A transaction history page.
 
@@ -25,7 +24,7 @@ where all the information regarding their portfolio is easily accessible.
  
 ## User Stories
 
-- As a user, I want to be able to add any number of stocks that I've bought to my investing account 
+- As a user, I want to be able to add any number of stocks that I've purchased to my investing account 
 (all users will only have one account for now).
 - As a user, I want to see the total amount of money I have deposited into my account.
 - As a user, I want to see the list of stocks I bought in my investing account, including each stock's value in the 

@@ -65,8 +65,6 @@ public class PersonalInvestingAccount {
         this.cashBalance = Math.round((this.cashBalance - purchasePriceRounded) * 100.00) / 100.00;
     }
 
-
-
     // getters
     public double getCashBalance() {
         return this.cashBalance;

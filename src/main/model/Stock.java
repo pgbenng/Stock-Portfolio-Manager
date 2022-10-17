@@ -24,4 +24,9 @@ public class Stock {
     public double getPrice() {
         return this.price;
     }
+
+    // setters
+    public void setPrice(double price) {
+        this.price = price;
+    }
 }
