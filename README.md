@@ -28,8 +28,10 @@ where all the information regarding their portfolio is easily accessible.
 
 - As a user, I want to be able to add any number of stocks that I've purchased to my investing account 
 (all users will only have one account for now).
+- As a user, I want to be able to remove any number of stocks that I've sold from my investing account.
 - As a user, I want to see the total amount of money I have deposited into my account as well as the account's current balance.
 - As a user, I want to see the list of stocks I bought in my investing account, including each stock's value in the 
 portfolio and number of shares purchased.
-- As a user, I want to see how much profit or loss I've gotten on my investments.
-- 
+- As a user, I want to save the current state of my portfolio to an external file.
+- As a user, I want to be able to load up the state of my portfolio from an external file.
+
