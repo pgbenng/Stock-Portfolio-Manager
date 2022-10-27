@@ -5,6 +5,7 @@ import java.util.List;
 
 import static java.lang.Math.round;
 
+//TODO: Class level comments
 public class PersonalInvestingAccount {
     private double cashBalance;
     private double accountValue;
@@ -39,7 +40,7 @@ public class PersonalInvestingAccount {
     // REQUIRES: numShares > 0, balance >= purchasePrice
     // MODIFIES: this
     // EFFECTS: adds number of shares of stock into the account's list of stocks if not already present, with
-    // updated stock's share amount and value in the account
+    // updated stock's share amount, value in the account and account balance
     public void purchaseStock(Stock s, int numShares) {
         double purchasePrice = s.getPrice() * numShares;
         double purchasePriceRounded = Math.round(purchasePrice * 100.0) / 100.0;
@@ -63,6 +64,28 @@ public class PersonalInvestingAccount {
             }
         }
         this.cashBalance = Math.round((this.cashBalance - purchasePriceRounded) * 100.00) / 100.00;
+    }
+
+    // REQUIRES: number of shares being sold <= number of shares of same stock currently in account
+    // MODIFIES: this
+    // EFFECTS: removes number of shares of stock out of the account's list of stocks, with balance updated
+    public void sellStock(Stock s, int numShares) {
+        double purchasePrice = s.getPrice() * numShares;
+        double purchasePriceRounded = Math.round(purchasePrice * 100.0) / 100.0;
+        for (int i = 0; i < this.stocksPurchased.size(); i++) {
+            if (s.getTicker().equals(stocksPurchased.get(i).getTicker())) {
+                if (this.stocksNumSharesPurchased.get(i) > numShares) {
+                    int updatedNumShares = this.stocksNumSharesPurchased.get(i).intValue() - numShares;
+                    this.stocksNumSharesPurchased.set(i, updatedNumShares);
+                } else if (this.stocksNumSharesPurchased.get(i) == numShares) {
+                    this.stocksNumSharesPurchased.remove(this.stocksPurchased.get(i));
+                    this.stocksPurchased.remove(i);
+                }
+                break;
+            }
+        }
+        this.cashBalance = Math.round((this.cashBalance + purchasePriceRounded) * 100.00) / 100.00;
+
     }
 
     // getters

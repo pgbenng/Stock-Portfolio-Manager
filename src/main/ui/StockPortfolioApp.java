@@ -9,7 +9,6 @@ import java.util.Scanner;
 public class StockPortfolioApp {
     private Scanner scan;
     private PersonalInvestingAccount investingAccount;
-    private StockWatchlist watchlist;
 
     // EFFECTS: runs the StockPortfolio console application
     public StockPortfolioApp() {
@@ -22,7 +21,6 @@ public class StockPortfolioApp {
         String command = null;
         this.scan = new Scanner(System.in);
         this.investingAccount = new PersonalInvestingAccount();
-        this.watchlist = new StockWatchlist();
         displayMenu();
         while (running) {
             command = this.scan.nextLine().toLowerCase();
@@ -39,27 +37,24 @@ public class StockPortfolioApp {
     private void displayMenu() {
         System.out.println("Welcome to my Stock Portfolio App! We have created an investment account for you.");
         System.out.println("Select from the following commands:");
-        System.out.println("- \"d\" to deposit money into your account.");
-        System.out.println("- \"adds\" to purchase a stock and add it to your account.");
-        System.out.println("- \"addw\" to add a stock to your watchlist.");
-        System.out.println("- \"da\" to display your investment account statistics.");
-        System.out.println("- \"dw\" to display your stock watchlist statistics.");
+        System.out.println("- \"depo\" to deposit money into your account.");
+        System.out.println("- \"buy\" to buy a stock.");
+        System.out.println("- \"sell\" to sell a stock.");
+        System.out.println("- \"stats\" to display your investment account statistics.");
         System.out.println("\"q\" to quit.");
     }
 
     // MODIFIES: this
     // EFFECTS: processes commands from user
     private void processCommand(String command) {
-        if (command.equals("d")) {
+        if (command.equals("depo")) {
             processDepositCommand();
-        } else if (command.equals("adds")) {
-            processPurchaseStockCommand();
-        } else if (command.equals("addw")) {
-            processAddStockToWatchlist();
-        } else if (command.equals("da")) {
+        } else if (command.equals("buy")) {
+            processBuyStockCommand();
+        } else if (command.equals("sell")) {
+            processSellStockCommand();
+        } else if (command.equals("stats")) {
             processDisplayInvestingAccount();
-        } else if (command.equals("dw")) {
-            processDisplayStockWatchlist();
         } else if (command.equals("")) {
             System.out.print("");
         } else {
@@ -74,11 +69,12 @@ public class StockPortfolioApp {
         double depositAmount = scan.nextDouble();
         this.investingAccount.depositMoney(depositAmount);
         System.out.println("Deposit successful.");
+        System.out.println("Your account balance is now $" + this.investingAccount.getCashBalance());
     }
 
     // MODIFIES: this
     // EFFECTS: invokes purchaseStock method, where user inputs all stock info and purchase details to pass along
-    private void processPurchaseStockCommand() {
+    private void processBuyStockCommand() {
         System.out.println("Please enter the stock details as follows: ");
         System.out.print("Stock name: ");
         String stockName = scan.nextLine();
@@ -90,11 +86,11 @@ public class StockPortfolioApp {
         System.out.println("Number of shares you want to purchase: ");
         int numShares = scan.nextInt();
         this.investingAccount.purchaseStock(inputStock, numShares);
+        System.out.println("Stock purchase successful.");
+        System.out.println("Your account balance is now $" + this.investingAccount.getCashBalance() + ".");
     }
 
-    // MODIFIES: this
-    // EFFECTS: invokes addStockToWatchlist method, where user inputs all stock info and purchase details to pass along
-    private void processAddStockToWatchlist() {
+    public void processSellStockCommand() {
         System.out.println("Please enter the stock details as follows: ");
         System.out.print("Stock name: ");
         String stockName = scan.nextLine();
@@ -103,13 +99,18 @@ public class StockPortfolioApp {
         System.out.print("Stock current price: ");
         double stockPrice = scan.nextDouble();
         Stock inputStock = new Stock(stockName, stockTicker, stockPrice);
-        this.watchlist.addStockToWatchlist(inputStock);
+        System.out.println("Number of shares you want to sell: ");
+        int numShares = scan.nextInt();
+        this.investingAccount.sellStock(inputStock, numShares);
+        System.out.println("Stock sale successful.");
+        System.out.println("Your account balance is now $" + this.investingAccount.getCashBalance() + ".");
     }
 
     // EFFECTS: displays the user's existing investing account general statistics
     private void processDisplayInvestingAccount() {
         System.out.println("You currently own " + this.investingAccount.getStocksPurchased().size()
                 + " different stocks!");
+        System.out.println("Your account balance is $" + this.investingAccount.getCashBalance() + ".");
         System.out.println("You have deposited a total amount of $" + this.investingAccount.getDepositAmount() + "!");
         if (this.investingAccount.getStocksPurchased().size() > 0) {
             displayListOfStocks();
@@ -119,33 +120,33 @@ public class StockPortfolioApp {
 
     // EFFECTS: displays the user's list of stocks in their investing account
     private void displayListOfStocks() {
-        for (int i = 0; i < investingAccount.getStocksPurchased().size(); i++) {
-            System.out.println(i + ": " + investingAccount.getStocksPurchased().get(i).getTicker());
+        for (int i = 0; i < this.investingAccount.getStocksPurchased().size(); i++) {
+            System.out.println(i + ": " + this.investingAccount.getStocksPurchased().get(i).getTicker());
         }
     }
 
+    // Citation: https://www.studytonight.com/java-examples/check-if-input-is-integer-in-java
+    // This website helped me learn about checking valid integers
     // EFFECTS: grants the user the option to look at detailed statistics of stocks in their account
     private void lookStock() {
-        System.out.println("Type each stock's associated index for more detailed statistics! Type \"quit\" to stop.");
-        int index = scan.nextInt();
-        if (index >= 0 && index < investingAccount.getStocksPurchased().size()) {
-            System.out.println("Stock name: " + this.investingAccount.getStocksPurchased().get(index).getName());
-            System.out.println("Stock ticker: "
-                    + this.investingAccount.getStocksPurchased().get(index).getTicker());
-            System.out.println("Stock price: " + this.investingAccount.getStocksPurchased().get(index).getPrice());
-            System.out.println("Number of shares of stock purchased: "
-                    + this.investingAccount.getStocksNumSharesPurchased().get(index));
-            System.out.println("Stock value: "
-                    + this.investingAccount.getStockValues().get(index));
+        System.out.println("Type each stock's associated index for more detailed statistics! Type 1000 to stop.");
+        boolean running = true;
+        while (running) {
+            int index = scan.nextInt();
+            if (index >= 0 && index < investingAccount.getStocksPurchased().size()) {
+                System.out.println("Stock name: " + this.investingAccount.getStocksPurchased().get(index).getName());
+                System.out.println("Stock ticker: "
+                        + this.investingAccount.getStocksPurchased().get(index).getTicker());
+                System.out.println("Stock price: " + this.investingAccount.getStocksPurchased().get(index).getPrice());
+                System.out.println("Number of shares of stock purchased: "
+                        + this.investingAccount.getStocksNumSharesPurchased().get(index));
+                // bugged System.out.println("Stock value: "
+                        //+ this.investingAccount.getStockValues().get(index));
+            } else if (index < 0 && index >= investingAccount.getStocksPurchased().size()
+                    || index == (int)index) {
+                running = false;
+            }
         }
     }
 
-    // EFFECTS: displays the user's stock watchlist
-    private void processDisplayStockWatchlist() {
-        System.out.println("You currently have " + this.watchlist.getWatchlist().size()
-                + " different stocks in your watchlist!");
-        for (int i = 0; i < watchlist.getWatchlist().size(); i++) {
-            System.out.println(i + ": " + watchlist.getWatchlist().get(i).getTicker());
-        }
-    }
 }

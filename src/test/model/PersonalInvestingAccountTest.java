@@ -107,4 +107,53 @@ public class PersonalInvestingAccountTest {
         assertEquals(2, testAccount.getStocksNumSharesPurchased().size());
         assertEquals(2, testAccount.getStockValues().size());
     }
+
+    @Test
+    public void testSellStockWithSomeRemainingSharesAndOnlyOneStockInAccount() {
+        testAccount.depositMoney(1000);
+        testAccount.purchaseStock(apple, 2);
+        testAccount.sellStock(apple, 1);
+        assertEquals(861.62, testAccount.getCashBalance());
+        assertTrue(testAccount.getStocksPurchased().contains(apple));
+        assertEquals(1, testAccount.getStocksNumSharesPurchased()
+                .get(testAccount.getStocksPurchased().indexOf(apple)));
+    }
+
+    @Test
+    public void testSellStockWithNoRemainingSharesAndOnlyOneStockInAccount() {
+        testAccount.depositMoney(1000);
+        testAccount.purchaseStock(apple, 2);
+        testAccount.sellStock(apple, 2);
+        assertEquals(1000, testAccount.getCashBalance());
+        assertFalse(testAccount.getStocksPurchased().contains(apple));
+        assertFalse(testAccount.getStocksNumSharesPurchased().contains(0));
+    }
+
+    @Test
+    public void testSellStockWithSomeRemainingSharesAndTwoStocksInAccount() {
+        testAccount.depositMoney(1000);
+        testAccount.purchaseStock(apple, 2);
+        testAccount.purchaseStock(amazon, 2);
+        testAccount.sellStock(apple, 1);
+        testAccount.sellStock(amazon, 1);
+        assertEquals(754.72, testAccount.getCashBalance());
+        assertEquals(0, testAccount.getStocksPurchased().indexOf(apple));
+        assertEquals(1, testAccount.getStocksPurchased().indexOf(amazon));
+        assertEquals(1, testAccount.getStocksNumSharesPurchased()
+                .get(testAccount.getStocksPurchased().indexOf(apple)));
+        assertEquals(1, testAccount.getStocksNumSharesPurchased()
+                .get(testAccount.getStocksPurchased().indexOf(amazon)));
+    }
+    @Test
+    public void testSellStockWithNoRemainingSharesAndTwoStocksInAccount() {
+        testAccount.depositMoney(1000);
+        testAccount.purchaseStock(apple, 2);
+        testAccount.purchaseStock(amazon, 2);
+        testAccount.sellStock(apple, 2);
+        assertEquals(786.20, testAccount.getCashBalance());
+        assertFalse(testAccount.getStocksPurchased().contains(apple));
+        assertEquals(0, testAccount.getStocksPurchased().indexOf(amazon));
+        assertEquals(2, testAccount.getStocksNumSharesPurchased().get(0));
+}
+
 }
