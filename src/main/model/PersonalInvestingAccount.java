@@ -86,11 +86,10 @@ public class PersonalInvestingAccount implements Writable {
                     this.stocksNumSharesPurchased.remove(this.stocksPurchased.get(i));
                     this.stocksPurchased.remove(i);
                 }
+                this.cashBalance = Math.round((this.cashBalance + purchasePriceRounded) * 100.00) / 100.00;
                 break;
             }
         }
-        this.cashBalance = Math.round((this.cashBalance + purchasePriceRounded) * 100.00) / 100.00;
-
     }
 
     // getters

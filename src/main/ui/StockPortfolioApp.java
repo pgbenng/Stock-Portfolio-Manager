@@ -1,14 +1,20 @@
 package ui;
 
 import model.*;
+import persistence.*;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Locale;
 import java.util.Scanner;
 
-// Some code from TellerApp was referenced during the implementation of this file's code
+// Some code from TellerApp and JsonSerializationDemo was referenced during the implementation of this file's code
+// Represents the investment account application
 public class StockPortfolioApp {
     private Scanner scan;
     private PersonalInvestingAccount investingAccount;
+    private JsonReader reader;
+    private JsonWriter writer;
 
     // EFFECTS: runs the StockPortfolio console application
     public StockPortfolioApp() {
@@ -41,6 +47,8 @@ public class StockPortfolioApp {
         System.out.println("- \"buy\" to buy a stock.");
         System.out.println("- \"sell\" to sell a stock.");
         System.out.println("- \"stats\" to display your investment account statistics.");
+        System.out.println("- \"save\" to save your account to file.");
+        System.out.println("- \"load\" to load an account from file.");
         System.out.println("\"q\" to quit.");
     }
 
@@ -55,6 +63,10 @@ public class StockPortfolioApp {
             processSellStockCommand();
         } else if (command.equals("stats")) {
             processDisplayInvestingAccount();
+        } else if (command.equals("save")) {
+            processSaveInvestingAccount();
+        } else if (command.equals("load")) {
+            processLoadInvestingAccount();
         } else if (command.equals("")) {
             System.out.print("");
         } else {
@@ -144,6 +156,28 @@ public class StockPortfolioApp {
                     || index != (int)index) {
                 running = false;
             }
+        }
+    }
+
+    // EFFECTS: saves investing account to file
+    private void processSaveInvestingAccount() {
+        try {
+            writer.open();
+            writer.write(investingAccount);
+            writer.close();
+            System.out.println("Saved account successfully.");
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file.");
+        }
+    }
+
+    // EFFECTS: loads investing account to file
+    private void processLoadInvestingAccount() {
+        try {
+            investingAccount = reader.read();
+            System.out.println("Loaded account from file.");
+        } catch (IOException e) {
+            System.out.println("Unable to read from file.");
         }
     }
 
