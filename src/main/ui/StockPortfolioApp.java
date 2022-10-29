@@ -11,6 +11,7 @@ import java.util.Scanner;
 // Some code from TellerApp and JsonSerializationDemo was referenced during the implementation of this file's code
 // Represents the investment account application
 public class StockPortfolioApp {
+    private static final String JSON_STORE = "./data/account.json";
     private Scanner scan;
     private PersonalInvestingAccount investingAccount;
     private JsonReader reader;
@@ -18,6 +19,8 @@ public class StockPortfolioApp {
 
     // EFFECTS: runs the StockPortfolio console application
     public StockPortfolioApp() {
+        writer = new JsonWriter(JSON_STORE);
+        reader = new JsonReader(JSON_STORE);
         runStockPortfolioApp();
     }
 
@@ -165,9 +168,9 @@ public class StockPortfolioApp {
             writer.open();
             writer.write(investingAccount);
             writer.close();
-            System.out.println("Saved account successfully.");
+            System.out.println("Saved account successfully to " + JSON_STORE);
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file.");
+            System.out.println("Unable to write to file " + JSON_STORE);
         }
     }
 
@@ -175,9 +178,9 @@ public class StockPortfolioApp {
     private void processLoadInvestingAccount() {
         try {
             investingAccount = reader.read();
-            System.out.println("Loaded account from file.");
+            System.out.println("Loaded account from " + JSON_STORE);
         } catch (IOException e) {
-            System.out.println("Unable to read from file.");
+            System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
 
