@@ -1,6 +1,10 @@
 package model;
 
-public class Stock {
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
+public class Stock implements Writable {
     private String name;
     private String ticker;
     private double price;
@@ -28,5 +32,14 @@ public class Stock {
     // setters
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("ticker", ticker);
+        json.put("price", price);
+        return json;
     }
 }

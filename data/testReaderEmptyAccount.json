@@ -1,0 +1,8 @@
+{
+  "cashBalance": 0,
+  "accountValue": 0,
+  "depositAmount": 0,
+  "stocksPurchased": [],
+  "stocksNumSharesPurchased": [],
+  "stockValues": []
+}

@@ -4,9 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Math.round;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
 
-//TODO: Class level comments
-public class PersonalInvestingAccount {
+// Citation: Some code is modeled after JsonSerializationDemo.
+// Represents an investing account that has a balance, value, amount of money deposited, as well as lists of
+// stocks purchased in the account, their associated number of shares purchased and stock values
+public class PersonalInvestingAccount implements Writable {
     private double cashBalance;
     private double accountValue;
     private double depositAmount;
@@ -111,5 +116,75 @@ public class PersonalInvestingAccount {
 
     public List<Double> getStockValues() {
         return this.stockValues;
+    }
+
+    // setters
+    public void setCashBalance(double cashBalance) {
+        this.cashBalance = cashBalance;
+    }
+
+    public void setAccountValue(double accountValue) {
+        this.accountValue = accountValue;
+    }
+
+    public void setDepositAmount(double depositAmount) {
+        this.depositAmount = depositAmount;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("cashBalance", cashBalance);
+        json.put("accountValue", accountValue);
+        json.put("depositAmount", depositAmount);
+        json.put("stocksPurchased", stocksPurchasedToJson());
+        json.put("stocksNumSharesPurchased", stocksNumSharesPurchasedToJson());
+        json.put("stockValues", stockValuesToJson());
+        return json;
+    }
+
+    // EFFECTS: returns list of stocks purchased as a JSON array
+    private JSONArray stocksPurchasedToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (Stock s : stocksPurchased) {
+            jsonArray.put(s.toJson());
+        }
+        return jsonArray;
+    }
+
+    // EFFECTS: returns list of each stock's number of shares purchased as a JSON array
+    private JSONArray stocksNumSharesPurchasedToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (Integer i : stocksNumSharesPurchased) {
+            jsonArray.put(i);
+        }
+        return jsonArray;
+    }
+
+    // EFFECTS: returns list of purchased stock values as a JSON array
+    private JSONArray stockValuesToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (Double d : stockValues) {
+            jsonArray.put(d);
+        }
+        return jsonArray;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: helper method for JsonWriter to add stocks into purchasedStock list
+    public void addStocksPurchased(Stock s) {
+        this.stocksPurchased.add(s);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: helper method for JsonWriter to add num shares of stock into stocksNumSharesPurchased list
+    public void addStocksNumSharesPurchased(Integer num) {
+        this.stocksNumSharesPurchased.add(num);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: helper method for JsonWriter to add stock values into stockValues list
+    public void addStockValues(Double value) {
+        this.stockValues.add(value);
     }
 }

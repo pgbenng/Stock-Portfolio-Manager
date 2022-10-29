@@ -1,0 +1,19 @@
+{
+  "cashBalance": 1000,
+  "accountValue": 1000,
+  "depositAmount": 1000,
+  "stocksPurchased": [
+    {
+      "name": "Apple",
+      "ticker": "$AAPL",
+      "price": 10
+    },
+    {
+      "name": "Amazon",
+      "ticker": "$AMZN",
+      "price": 5
+    }
+  ],
+  "stocksNumSharesPurchased": [2, 1],
+  "stockValues": [10, 9]
+}

@@ -125,8 +125,6 @@ public class StockPortfolioApp {
         }
     }
 
-    // Citation: https://www.studytonight.com/java-examples/check-if-input-is-integer-in-java
-    // This website helped me learn about checking valid integers
     // EFFECTS: grants the user the option to look at detailed statistics of stocks in their account
     private void lookStock() {
         System.out.println("Type each stock's associated index for more detailed statistics! Type 1000 to stop.");
@@ -143,7 +141,7 @@ public class StockPortfolioApp {
                 // bugged System.out.println("Stock value: "
                         //+ this.investingAccount.getStockValues().get(index));
             } else if (index < 0 && index >= investingAccount.getStocksPurchased().size()
-                    || index == (int)index) {
+                    || index != (int)index) {
                 running = false;
             }
         }
