@@ -156,7 +156,7 @@ public class StockPortfolioApp {
                 // bugged System.out.println("Stock value: "
                         //+ this.investingAccount.getStockValues().get(index));
             } else if (index < 0 && index >= investingAccount.getStocksPurchased().size()
-                    || index != (int)index) {
+                    || index == (int)index) {
                 running = false;
             }
         }
