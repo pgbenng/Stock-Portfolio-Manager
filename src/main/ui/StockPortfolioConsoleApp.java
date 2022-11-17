@@ -183,4 +183,8 @@ public class StockPortfolioConsoleApp {
         }
     }
 
+    public static void main(String[] args) {
+        new StockPortfolioConsoleApp();
+    }
+
 }

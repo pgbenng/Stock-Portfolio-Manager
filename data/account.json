@@ -1,25 +1,12 @@
 {
-    "depositAmount": 1063,
-    "stockValues": [
-        80,
-        100
-    ],
+    "depositAmount": 1000,
+    "stockValues": [100],
     "accountValue": 0,
-    "cashBalance": 883,
-    "stocksPurchased": [
-        {
-            "ticker": "a",
-            "price": 4,
-            "name": "a"
-        },
-        {
-            "ticker": "b",
-            "price": 50,
-            "name": "b"
-        }
-    ],
-    "stocksNumSharesPurchased": [
-        20,
-        2
-    ]
+    "cashBalance": 900,
+    "stocksPurchased": [{
+        "ticker": "a",
+        "price": 50,
+        "name": "a"
+    }],
+    "stocksNumSharesPurchased": [2]
 }

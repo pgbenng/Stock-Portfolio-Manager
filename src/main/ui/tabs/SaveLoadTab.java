@@ -46,7 +46,7 @@ public class SaveLoadTab extends Tab {
         });
 
         loadButton.addActionListener(e -> {
-            //loadAction();
+            loadAction();
         });
         this.add(buttonRow);
     }
@@ -62,21 +62,14 @@ public class SaveLoadTab extends Tab {
         }
     }
 
-    /*
+    // TODO: Debug
     private void loadAction() {
         try {
-            reader.read();
+            this.account = reader.read();
+            controller.setAccount(this.account);
             System.out.println("Loaded account from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
-        //debug
-        System.out.println("Balance: " + this.account.getCashBalance());
-    }
-
-     */
-
-    public PersonalInvestingAccount getLoadedAccount() {
-        return this.account;
     }
 }

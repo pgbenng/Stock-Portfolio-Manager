@@ -17,11 +17,10 @@ public class StockPortfolioGUI extends JFrame {
     // https://docs.oracle.com/javase/tutorial/uiswing/examples/components/index.html
 
     /*
-    Starts with empty account, needs depo, account stats, each stock in acc stats, buy, sell, save, load.
     TODO:
-    - Button to save data
     - Button to load data
     - Visual component:
+    - Code comments
      */
 
     private PersonalInvestingAccount account;
@@ -79,9 +78,6 @@ public class StockPortfolioGUI extends JFrame {
             String depositAmount = JOptionPane.showInputDialog(null,
                     "Enter deposit amount below:", "Deposit Menu", JOptionPane.QUESTION_MESSAGE);
             account.depositMoney(Double.parseDouble(depositAmount));
-
-            // for use during debugging
-            System.out.println("Balance " + account.getCashBalance());
         }
     }
 
@@ -107,13 +103,6 @@ public class StockPortfolioGUI extends JFrame {
                 Stock stock = new Stock(stockName, stockTicker, Double.parseDouble(stockPrice));
                 account.purchaseStock(stock, Integer.parseInt(shareAmount));
             }
-
-            // for use during debugging
-            for (Stock s : account.getStocksPurchased()) {
-                System.out.println(s.getName());
-            }
-            System.out.println(account.getStocksNumSharesPurchased());
-            System.out.println(account.getCashBalance());
         }
     }
 
