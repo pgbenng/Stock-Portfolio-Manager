@@ -35,8 +35,9 @@ public class PersonalInvestingAccount implements Writable {
     // EFFECTS: adds the inputted amount of money into the existing investing account while increasing the total
     // amount of money deposited
     public void depositMoney(double amount) {
-        this.cashBalance += amount;
-        this.depositAmount += amount;
+        double amountRounded = Math.round(amount * 100.0) / 100.0;
+        this.cashBalance += amountRounded;
+        this.depositAmount += amountRounded;
     }
 
     // Citation: https://intellipaat.com/community/35143/how-to-round-up-to-2-decimal-places-in-java
