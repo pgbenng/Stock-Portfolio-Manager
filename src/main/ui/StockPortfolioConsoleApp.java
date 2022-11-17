@@ -5,12 +5,11 @@ import persistence.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Locale;
 import java.util.Scanner;
 
 // Some code from TellerApp and JsonSerializationDemo was referenced during the implementation of this file's code
 // Represents the investment account application
-public class StockPortfolioApp {
+public class StockPortfolioConsoleApp {
     private static final String JSON_STORE = "./data/account.json";
     private Scanner scan;
     private PersonalInvestingAccount investingAccount;
@@ -18,7 +17,7 @@ public class StockPortfolioApp {
     private JsonWriter writer;
 
     // EFFECTS: runs the StockPortfolio console application
-    public StockPortfolioApp() {
+    public StockPortfolioConsoleApp() {
         writer = new JsonWriter(JSON_STORE);
         reader = new JsonReader(JSON_STORE);
         runStockPortfolioApp();
