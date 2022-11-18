@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+// Represents the Save/Load tab on the sidebar
 public class SaveLoadTab extends Tab {
     private JLabel greeting;
     private JsonReader reader;
@@ -27,6 +28,8 @@ public class SaveLoadTab extends Tab {
         reader = new JsonReader(JSON_STORE);
     }
 
+    // MODIFIES: this
+    // helper to put the greeting into SaveLoadTab's frame
     private void placeGreeting() {
         greeting = new JLabel("You can choose to save your current portfolio or load another from file.",
                 JLabel.CENTER);
@@ -34,6 +37,8 @@ public class SaveLoadTab extends Tab {
         this.add(greeting);
     }
 
+    // MODIFIES: this
+    // helper to put save and load buttons into frame
     private void placeSaveLoadButtons() {
         JButton saveButton = new JButton("Save");
         JButton loadButton = new JButton("Load");
@@ -51,6 +56,7 @@ public class SaveLoadTab extends Tab {
         this.add(buttonRow);
     }
 
+    // EFFECTS: specifies action of button, performs save function
     private void saveAction() {
         try {
             writer.open();
@@ -62,11 +68,10 @@ public class SaveLoadTab extends Tab {
         }
     }
 
-    // TODO: Debug
+    // EFFECTS: specifies action of button, performs load function (not working)
     private void loadAction() {
         try {
-            this.account = reader.read();
-            controller.setAccount(this.account);
+            controller.setAccount(reader.read());
             System.out.println("Loaded account from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);

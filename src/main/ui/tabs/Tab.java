@@ -6,6 +6,7 @@ import ui.StockPortfolioGUI;
 import javax.swing.*;
 import java.awt.*;
 
+// abstract class that represents all sidebar tabs in frame
 public abstract class Tab extends JPanel {
     protected PersonalInvestingAccount account;
     protected StockPortfolioGUI controller;
