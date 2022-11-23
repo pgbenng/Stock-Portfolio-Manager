@@ -86,7 +86,7 @@ public class PersonalInvestingAccount implements Writable {
                     this.cashBalance = Math.round((this.cashBalance + purchasePriceRounded) * 100.00) / 100.00;
                     break;
                 } else if (this.stocksNumSharesPurchased.get(i) == numShares) {
-                    this.stocksNumSharesPurchased.remove(this.stocksPurchased.get(i));
+                    this.stocksNumSharesPurchased.remove(i);
                     this.stocksPurchased.remove(i);
                     this.cashBalance = Math.round((this.cashBalance + purchasePriceRounded) * 100.00) / 100.00;
                     break;
