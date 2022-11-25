@@ -38,6 +38,7 @@ public class PersonalInvestingAccount implements Writable {
         double amountRounded = Math.round(amount * 100.0) / 100.0;
         this.cashBalance += amountRounded;
         this.depositAmount += amountRounded;
+        EventLog.getInstance().logEvent(new Event("$" + amountRounded + " deposited to account."));
     }
 
     // Citation: https://intellipaat.com/community/35143/how-to-round-up-to-2-decimal-places-in-java
@@ -70,6 +71,8 @@ public class PersonalInvestingAccount implements Writable {
             }
         }
         this.cashBalance = Math.round((this.cashBalance - purchasePriceRounded) * 100.00) / 100.00;
+        EventLog.getInstance().logEvent(new Event(numShares + " " + s.getName() + " shares purchased at $"
+                + s.getPrice() + " each."));
     }
 
     // REQUIRES: number of shares being sold <= number of shares of same stock currently in account
@@ -95,6 +98,8 @@ public class PersonalInvestingAccount implements Writable {
                 }
             }
         }
+        EventLog.getInstance().logEvent(new Event(numShares + " " + s.getName() + " shares sold at $"
+                + s.getPrice() + " each."));
     }
 
     // getters

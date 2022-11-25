@@ -1,6 +1,7 @@
 package ui;
 
 import model.*;
+import model.Event;
 import persistence.*;
 import ui.tabs.*;
 
@@ -8,12 +9,15 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 // Represents the Graphical User Interface for the StockPortfolio app
-public class StockPortfolioGUI extends JFrame {
+public class StockPortfolioGUI extends JFrame implements WindowListener {
     // Represents the stock portfolio application's main page.
     // Citation: Some code is modeled after Oracle's Java Swing demo files, AlarmSystem and SmartHome.
     // https://docs.oracle.com/javase/tutorial/uiswing/examples/components/index.html
+    // https://docs.oracle.com/javase/tutorial/uiswing/events/windowlistener.html
 
     private PersonalInvestingAccount account;
     private JTabbedPane sidebar;
@@ -34,7 +38,8 @@ public class StockPortfolioGUI extends JFrame {
         sidebar.setTabPlacement(JTabbedPane.RIGHT);
         addTabs();
         add(sidebar);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        addWindowListener(this);
         setVisible(true);
     }
 
@@ -62,6 +67,50 @@ public class StockPortfolioGUI extends JFrame {
         menuBar.add(sellStock);
 
         setJMenuBar(menuBar);
+    }
+
+    // methods inherited from WindowListener interface
+    @Override
+    public void windowOpened(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+
+    }
+
+    // EFFECTS: determines behaviour after closing window
+    @Override
+    public void windowClosed(WindowEvent e) {
+        printLog(EventLog.getInstance());
+    }
+
+    // EFFECTS: helper method to print all events logged in instance's EventLog
+    private void printLog(EventLog e) {
+        for (Event event : e) {
+            System.out.println(event.getDescription());
+        }
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
     }
 
     // helper class that represents deposit menu button

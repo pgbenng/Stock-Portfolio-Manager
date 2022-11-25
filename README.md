@@ -43,3 +43,10 @@ portfolio and number of shares purchased.
 - You can locate my visual component by navigating to the Visual tab on the right sidebar.
 - You can save the state of my application by navigating to the Save/Load tab on the right sidebar, then clicking on the 'Save' button.
 - You can reload the state of my application by navigating to the Save/Load tab on the right sidebar, then clicking on the 'Load' button.
+
+# Phase 4: Task 2
+
+- $1000.0 deposited to account.
+- 2 Apple shares purchased at $200.0 each.
+- 4 Amazon shares purchased at $50.0 each.
+- 2 Apple shares sold at $300.0 each.
