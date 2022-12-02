@@ -50,3 +50,8 @@ portfolio and number of shares purchased.
 - 2 Apple shares purchased at $200.0 each.
 - 4 Amazon shares purchased at $50.0 each.
 - 2 Apple shares sold at $300.0 each.
+
+# Phase 4: Task 3
+- If I had more time to work on this project, I would:
+  - Use the Singleton Design Pattern for the account used in both Tab and StockPortfolioGUI, so that they can  have access to the same instance of the account, minimizing bugs and unintended behaviour.
+  - Refactor methods with too many lines to improve readability.
