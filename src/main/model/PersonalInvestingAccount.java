@@ -49,8 +49,7 @@ public class PersonalInvestingAccount implements Writable {
     // EFFECTS: adds number of shares of stock into the account's list of stocks if not already present, with
     // updated stock's share amount, value in the account and account balance
     public void purchaseStock(Stock s, int numShares) {
-        double purchasePrice = s.getPrice() * numShares;
-        double purchasePriceRounded = Math.round(purchasePrice * 100.0) / 100.0;
+        double purchasePriceRounded = Math.round((s.getPrice() * numShares) * 100.0) / 100.0;
         if (stocksPurchased.size() == 0) {
             this.stocksPurchased.add(s);
             this.stockValues.add(purchasePriceRounded);
